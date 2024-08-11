@@ -11,6 +11,9 @@ data:
     kind: Job
     spec:
       template:
+        metadata:
+          annotations:
+            "sidecar.istio.io/inject": "false"
         spec:
           containers:
             - name: training-container
@@ -22,5 +25,5 @@ data:
                 - "--ne=${trialParameters.nEstimators}"
                 - "--booster=${trialParameters.booster}"
                 - "--rs-${trialParameters.randomState}"
-                - "--device=gpu"
+                - "--device=cuda"
           restartPolicy: Never
